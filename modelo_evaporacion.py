@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+import plotly.express as px
 
 def Pr_vap_sat(T):
     return 6.11*np.exp((17.27*T)/(237.3+T))
@@ -23,9 +23,9 @@ def calcular_evaporacion(archivo):
 
     Rn=float(datos.iloc[0,5])
 
-    temp=float(datos.iloc[0,9])
-    Tmin=float(datos.iloc[0,11])
-    Tmax=float(datos.iloc[0,12])
+    temp=float(datos.iloc[0,8])
+    Tmin=float(datos.iloc[0,10])
+    Tmax=float(datos.iloc[0,11])
 
     hr=float(datos.iloc[0,14])
     vv=float(datos.iloc[0,15])
