@@ -21,14 +21,14 @@ def calcular_evaporacion(archivo):
     mes=int(datos.iloc[0,3])
     dia=int(datos.iloc[0,4])
 
-    Rn=float(datos.iloc[0,6])
+    Rn=float(datos.iloc[0,5])
 
     temp=float(datos.iloc[0,9])
     Tmin=float(datos.iloc[0,11])
     Tmax=float(datos.iloc[0,12])
 
-    hr=float(datos.iloc[0,15])
-    vv=float(datos.iloc[0,16])
+    hr=float(datos.iloc[0,14])
+    vv=float(datos.iloc[0,15])
 
 
     fecha=pd.Timestamp(
