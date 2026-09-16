@@ -39,7 +39,8 @@ if archivo:
         resultado=calcular_evaporacion(
             archivo
         )
-
+        
+        st.write(resultado.keys())
 
         st.success(
             "Calculo realizado correctamente"
