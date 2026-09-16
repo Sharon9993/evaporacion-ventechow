@@ -1,5 +1,3 @@
-pip install -r requirements.txt
-
 import streamlit as st
 
 from modelo_evaporacion import calcular_evaporacion
