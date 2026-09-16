@@ -2,16 +2,21 @@ import streamlit as st
 
 from modelo_evaporacion import calcular_evaporacion
 
+st.set_page_config(
+    page_title="Evaporacion Ven Te Chow",
+    layout="wide"
+)
 
-st.title("💧 Evaporación Ven Te Chow")
+
+st.title("💧 Evaporacion Ven Te Chow")
 
 st.write(
 """
-Aplicativo hidrológico basado en el método combinado
+Aplicativo hidrologico basado en el metodo combinado
 de Ven Te Chow.
 
-El modelo calcula la evaporación diaria considerando:
-- Radiación disponible
+El modelo integra:
+- Radiacion disponible
 - Temperatura
 - Humedad relativa
 - Velocidad del viento
@@ -20,15 +25,15 @@ El modelo calcula la evaporación diaria considerando:
 
 
 archivo=st.file_uploader(
-"Cargar archivo data_evap.xlsx",
-type=["xlsx"]
+    "Cargar archivo data_evap.xlsx",
+    type=["xlsx"]
 )
 
 
 
 if archivo:
 
-    if st.button("Calcular"):
+    if st.button("Calcular evaporacion"):
 
 
         resultado=calcular_evaporacion(
@@ -37,7 +42,7 @@ if archivo:
 
 
         st.success(
-        "Cálculo realizado correctamente"
+            "Calculo realizado correctamente"
         )
 
 
@@ -45,18 +50,72 @@ if archivo:
 
 
         col1.metric(
-        "Evaporación",
-        f"{resultado['evaporacion']:.3f} mm/día"
+            "Evaporacion final",
+            f"{resultado['evap']:.3f} mm/dia"
         )
 
 
         col2.metric(
-        "Radiación extraterrestre",
-        f"{resultado['radiacion']:.3f}"
+            "Radiacion extraterrestre",
+            f"{resultado['rad']:.3f}"
         )
 
 
         col3.metric(
-        "Déficit vapor",
-        f"{resultado['deficit']:.3f} KPa"
+            "Deficit vapor",
+            f"{resultado['def']:.3f} KPa"
         )
+
+
+
+        st.divider()
+
+
+        st.subheader(
+            "Resultados del modelo"
+        )
+
+
+        st.dataframe(
+            resultado["tabla"],
+            use_container_width=True
+        )
+
+
+
+        st.divider()
+
+
+        st.subheader(
+            "Graficos hidrologicos"
+        )
+
+
+        tab1,tab2,tab3=st.tabs(
+            [
+            "Radiacion",
+            "Temperatura",
+            "Evaporacion"
+            ]
+        )
+
+
+        with tab1:
+            st.plotly_chart(
+                resultado["graf_rad"],
+                use_container_width=True
+            )
+
+
+        with tab2:
+            st.plotly_chart(
+                resultado["graf_temp"],
+                use_container_width=True
+            )
+
+
+        with tab3:
+            st.plotly_chart(
+                resultado["graf_evap"],
+                use_container_width=True
+            )
